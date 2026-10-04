@@ -1,0 +1,1769 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=5.0, user-scalable=yes">
+  <title>APPLE GEAR HUB // Precision Apple Ecosystem Accessories</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Phosphor Icons (iOS & Apple standard icons) -->
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css"/>
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/bold/style.css"/>
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css"/>
+
+  <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', '-apple-system', 'BlinkMacSystemFont', '"SF Pro Display"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            obsidian: '#0b0f17',
+            deepSlate: '#0f172a',
+            titanium: {
+              50: '#faf8f5',
+              100: '#f5f0e8',
+              200: '#ebe1d2',
+              300: '#dcceb8',
+              400: '#c5b195',
+              500: '#b0997a', // Apple Desert Titanium
+              600: '#947d61',
+              700: '#76624c',
+              800: '#584939',
+              900: '#3c3227',
+            },
+            amberLuxe: {
+              50: '#fffbeb',
+              100: '#fef3c7',
+              200: '#fde68a',
+              300: '#fcd34d',
+              400: '#fbbf24',
+              500: '#f59e0b',
+              600: '#d97706', // Warm Amber
+              700: '#b45309', // Cognac Bronze
+              800: '#92400e',
+              900: '#78350f',
+            },
+            ceramic: '#fcfcfd',
+          },
+          boxShadow: {
+            'luxe': '0 8px 24px -6px rgba(11, 15, 23, 0.05), 0 16px 20px -4px rgba(11, 15, 23, 0.02)',
+            'sheet': '0 -10px 40px -10px rgba(11, 15, 23, 0.25)',
+            'dock': '0 -4px 20px rgba(11, 15, 23, 0.07)',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root {
+      --sat: env(safe-area-inset-top, 0px);
+      --sab: env(safe-area-inset-bottom, 0px);
+      --sar: env(safe-area-inset-right, 0px);
+      --sal: env(safe-area-inset-left, 0px);
+    }
+    
+    html, body {
+      background-color: #fbfbfc;
+      color: #0b0f17;
+      -webkit-font-smoothing: antialiased;
+      -webkit-tap-highlight-color: transparent;
+      text-rendering: optimizeLegibility;
+      touch-action: manipulation;
+      overflow-x: hidden;
+      width: 100%;
+    }
+
+    /* iOS Glassmorphism */
+    .ios-glass {
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(24px) saturate(180%);
+      -webkit-backdrop-filter: blur(24px) saturate(180%);
+    }
+
+    .ios-glass-dark {
+      background: rgba(11, 15, 23, 0.85);
+      backdrop-filter: blur(24px) saturate(180%);
+      -webkit-backdrop-filter: blur(24px) saturate(180%);
+    }
+
+    /* Tactile Micro-Interactions */
+    .touch-press {
+      transition: transform 0.15s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.15s ease;
+    }
+    .touch-press:active {
+      transform: scale(0.95);
+      opacity: 0.9;
+    }
+
+    /* Bottom Sheet Dynamic Height & Transitions */
+    .sheet-transition {
+      transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.3s ease;
+    }
+
+    /* Subtle Desert Mesh */
+    .titanium-mesh {
+      background-image: 
+        radial-gradient(circle at 10% 8%, rgba(217, 119, 6, 0.04) 0%, transparent 45%),
+        radial-gradient(circle at 90% 90%, rgba(176, 153, 122, 0.06) 0%, transparent 50%);
+    }
+
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+    /* Pull handle indicator on iOS sheets */
+    .pull-handle {
+      width: 36px;
+      height: 4.5px;
+      background-color: #cbd5e1;
+      border-radius: 9999px;
+      margin: 8px auto 14px auto;
+    }
+
+    /* Smooth Momentum Scrolling */
+    .ios-scroll {
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior-y: contain;
+    }
+  </style>
+</head>
+
+<body class="min-h-screen flex flex-col font-sans titanium-mesh pb-28 md:pb-12 selection:bg-amberLuxe-700 selection:text-white">
+
+  <header class="sticky top-0 z-40 ios-glass border-b border-slate-200/80 transition-all duration-200" style="padding-top: max(0.5rem, var(--sat));">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 h-14 sm:h-16 flex items-center justify-between gap-3">
+      
+      <!-- LOGO: 100% INVISIBLE TRIGGER (Tap 5 times in 3.5s to trigger PIN 1234) -->
+      <div id="brandLogoTrigger" class="flex items-center gap-2.5 cursor-pointer select-none group touch-press" title="Apple Gear Hub">
+        <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl sm:rounded-2xl bg-gradient-to-br from-obsidian to-deepSlate flex items-center justify-center text-titanium-100 shadow-sm border border-titanium-400/20 group-hover:border-amberLuxe-500/50 transition-all">
+          <i class="ph-bold ph-apple-logo text-xl sm:text-2xl text-titanium-200"></i>
+        </div>
+        <div>
+          <span class="font-extrabold text-base sm:text-lg tracking-tight text-obsidian block leading-tight">AppleGear<span class="text-amberLuxe-600">Hub</span></span>
+          <span class="text-[9px] uppercase font-bold tracking-widest text-slate-400 block -mt-0.5">Titanium Edition</span>
+        </div>
+      </div>
+
+      <!-- DESKTOP SEARCH BAR (Hidden on Mobile, accessed via bottom bar) -->
+      <div class="hidden md:flex flex-1 max-w-md mx-4">
+        <div class="relative w-full">
+          <i class="ph ph-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-base"></i>
+          <input 
+            type="text" 
+            id="desktopSearchInput" 
+            placeholder="Search MagSafe, Apple Pencil, Bands..." 
+            class="w-full pl-9 pr-8 py-2 bg-slate-100/90 border border-slate-200/70 rounded-full text-xs text-slate-800 placeholder-slate-400 focus:bg-white focus:border-amberLuxe-600 focus:outline-none transition-all shadow-inner"
+          >
+          <button id="desktopClearSearchBtn" class="hidden absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600">
+            <i class="ph-bold ph-x-circle text-sm"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- RIGHT HEADER CONTROLS (DESKTOP BAG & QUICK NOTIFICATION) -->
+      <div class="flex items-center gap-2">
+        <span class="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-titanium-100/90 border border-titanium-200 text-amberLuxe-900 text-[10px] font-bold">
+          <i class="ph-fill ph-check-circle text-amberLuxe-600"></i> Apple Certified
+        </span>
+
+        <!-- Desktop Bag Trigger -->
+        <button id="desktopOpenCartBtn" class="hidden sm:flex relative items-center gap-2 px-3.5 py-2 bg-white border border-slate-200/90 hover:border-amberLuxe-500/50 rounded-full shadow-xs touch-press group">
+          <i class="ph-bold ph-handbag text-base text-slate-700 group-hover:text-amberLuxe-700 transition-colors"></i>
+          <span id="desktopCartBadge" class="bg-gradient-to-r from-amberLuxe-600 to-amberLuxe-700 text-white text-[10px] font-bold h-4 min-w-[16px] px-1 rounded-full flex items-center justify-center">0</span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <section class="px-3 sm:px-6 pt-3 sm:pt-6 pb-2 max-w-7xl mx-auto w-full">
+    <div class="relative bg-gradient-to-br from-white via-titanium-50/70 to-amberLuxe-50/40 border border-slate-200/80 rounded-2xl sm:rounded-3xl p-4 sm:p-8 shadow-luxe overflow-hidden">
+      <!-- Glow Decor -->
+      <div class="absolute -top-12 -right-12 w-48 h-48 bg-amberLuxe-500/10 rounded-full blur-2xl pointer-events-none"></div>
+
+      <div class="relative flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div>
+          <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-white/95 border border-titanium-300 text-amberLuxe-800 text-[10px] font-bold uppercase tracking-wider mb-2 shadow-xs">
+            <span class="w-1.5 h-1.5 rounded-full bg-amberLuxe-600"></span> Genuine Apple Ecosystem
+          </div>
+          <h1 class="text-xl sm:text-3xl font-extrabold text-obsidian tracking-tight leading-tight">
+            Designed for <span class="text-transparent bg-clip-text bg-gradient-to-r from-amberLuxe-700 via-amberLuxe-600 to-titanium-700">Pro & Titanium.</span>
+          </h1>
+          <p class="text-xs sm:text-sm text-slate-600 mt-1 max-w-xl leading-relaxed">
+            25W Qi2 wireless hardware, cantilever keyboards, and Grade 5 titanium accessories.
+          </p>
+        </div>
+
+        <!-- Quick Code Badge for Phones -->
+        <div class="flex items-center gap-2 bg-white/90 border border-titanium-200 p-2 sm:p-3 rounded-xl self-start sm:self-auto shadow-xs">
+          <i class="ph-fill ph-tag text-amberLuxe-600 text-lg"></i>
+          <div>
+            <div class="text-[9px] uppercase tracking-wider text-slate-400 font-bold">10% Privilege Code</div>
+            <div class="text-xs font-mono font-bold text-obsidian">LUXE10</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main id="productsCatalog" class="max-w-7xl mx-auto px-3 sm:px-6 pt-3 pb-8 w-full flex-1">
+    
+    <!-- Smooth Horizontal Category Snap Scroller (Mobile-First) -->
+    <div class="sticky top-14 sm:top-16 z-30 py-2.5 ios-glass -mx-3 px-3 sm:mx-0 sm:px-0 border-b border-slate-200/60 mb-3">
+      <div class="flex items-center gap-1.5 overflow-x-auto no-scrollbar scroll-smooth snap-x" id="categoryFilterContainer">
+        <button data-cat="all" class="cat-pill active snap-start px-3.5 py-1.5 rounded-full text-xs font-bold transition-all bg-obsidian text-white shadow-xs whitespace-nowrap touch-press">
+          All Gear
+        </button>
+        <button data-cat="iPhone" class="cat-pill snap-start px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all bg-white text-slate-600 hover:text-obsidian border border-slate-200 whitespace-nowrap touch-press">
+          iPhone
+        </button>
+        <button data-cat="Mac" class="cat-pill snap-start px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all bg-white text-slate-600 hover:text-obsidian border border-slate-200 whitespace-nowrap touch-press">
+          Mac
+        </button>
+        <button data-cat="iPad" class="cat-pill snap-start px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all bg-white text-slate-600 hover:text-obsidian border border-slate-200 whitespace-nowrap touch-press">
+          iPad
+        </button>
+        <button data-cat="Watch" class="cat-pill snap-start px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all bg-white text-slate-600 hover:text-obsidian border border-slate-200 whitespace-nowrap touch-press">
+          Watch
+        </button>
+        <button data-cat="AirPods" class="cat-pill snap-start px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all bg-white text-slate-600 hover:text-obsidian border border-slate-200 whitespace-nowrap touch-press">
+          AirPods
+        </button>
+      </div>
+
+      <!-- Live Search & Sort Bar for Mobile -->
+      <div class="flex items-center justify-between mt-2 pt-1 text-[11px] text-slate-500">
+        <span id="productCounterText" class="font-semibold text-slate-700">Loading catalog...</span>
+        <div class="flex items-center gap-1.5">
+          <label for="sortSelect" class="text-slate-400">Sort:</label>
+          <select id="sortSelect" class="bg-white border border-slate-200 rounded-lg px-2 py-1 text-[11px] font-bold text-slate-700 focus:outline-none">
+            <option value="featured">Featured</option>
+            <option value="price-asc">Price ↑</option>
+            <option value="price-desc">Price ↓</option>
+            <option value="rating">Rating</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Smartphone Optimized 2-Column Grid (grid-cols-2 on mobile, 4 on desktop) -->
+    <div id="productsGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2.5 sm:gap-4">
+      <!-- Dynamic rendering via JS -->
+    </div>
+
+    <!-- Empty Results Alert -->
+    <div id="noProductsFound" class="hidden text-center py-14 px-4 bg-white rounded-2xl border border-slate-200 mt-4">
+      <div class="w-12 h-12 rounded-full bg-titanium-100 text-amberLuxe-700 mx-auto flex items-center justify-center mb-3">
+        <i class="ph ph-magnifying-glass text-xl"></i>
+      </div>
+      <h3 class="text-sm font-bold text-obsidian">No items found</h3>
+      <p class="text-xs text-slate-500 mt-0.5">Try searching with another keyword.</p>
+      <button onclick="resetFilters()" class="mt-3 px-4 py-1.5 rounded-full text-xs font-bold bg-obsidian text-white touch-press">Reset View</button>
+    </div>
+  </main>
+
+  <div id="productDetailSheet" class="fixed inset-0 z-50 pointer-events-none transition-opacity duration-300 opacity-0">
+    <!-- Backdrop -->
+    <div id="detailBackdrop" class="absolute inset-0 bg-obsidian/60 backdrop-blur-xs transition-opacity duration-300 pointer-events-auto" onclick="closeProductDetailModal()"></div>
+    
+    <!-- Slide-Up Sheet Container -->
+    <div id="detailPanel" class="absolute bottom-0 left-0 right-0 sm:inset-x-auto sm:top-1/2 sm:left-1/2 sm:bottom-auto sm:-translate-x-1/2 sm:-translate-y-1/2 sm:max-w-2xl w-full bg-white rounded-t-3xl sm:rounded-3xl shadow-sheet sm:shadow-modal flex flex-col pointer-events-auto transform translate-y-full sm:translate-y-0 sm:scale-95 sheet-transition max-h-[92vh] sm:max-h-[85vh] overflow-hidden border border-slate-200" style="padding-bottom: max(0.5rem, var(--sab));">
+      
+      <!-- iOS Pull Bar on Mobile -->
+      <div class="pull-handle sm:hidden"></div>
+
+      <!-- Sheet Header -->
+      <div class="px-4 sm:px-6 pt-1 sm:pt-5 pb-3 border-b border-slate-100 flex items-start justify-between">
+        <div>
+          <span id="modalCategoryBadge" class="text-[10px] uppercase font-bold tracking-widest text-amberLuxe-700 block">Ecosystem Category</span>
+          <h2 id="modalProductTitle" class="text-base sm:text-xl font-black text-obsidian tracking-tight leading-snug mt-0.5">Product Title</h2>
+        </div>
+        <button onclick="closeProductDetailModal()" class="w-8 h-8 rounded-full bg-slate-100 active:bg-slate-200 flex items-center justify-center text-slate-600 touch-press ml-2">
+          <i class="ph-bold ph-x text-sm"></i>
+        </button>
+      </div>
+
+      <!-- Scrollable Sheet Content -->
+      <div class="overflow-y-auto ios-scroll px-4 sm:px-6 py-4 space-y-4">
+        
+        <!-- Toggle: Photo Gallery vs Hardware Video Showcase -->
+        <div class="flex items-center gap-2 bg-slate-100 p-1 rounded-xl">
+          <button id="tabBtnPhotos" onclick="switchDetailTab('photos')" class="flex-1 py-1.5 rounded-lg text-xs font-bold bg-white text-obsidian shadow-xs flex items-center justify-center gap-1.5 transition-all">
+            <i class="ph-bold ph-images text-sm"></i> Photos
+          </button>
+          <button id="tabBtnVideo" onclick="switchDetailTab('video')" class="flex-1 py-1.5 rounded-lg text-xs font-bold text-slate-600 hover:text-obsidian flex items-center justify-center gap-1.5 transition-all">
+            <i class="ph-bold ph-play-circle text-sm"></i> Video Demo
+          </button>
+        </div>
+
+        <!-- Photos Viewport -->
+        <div id="detailPhotosContainer">
+          <div class="w-full aspect-[4/3] rounded-2xl bg-titanium-50/60 border border-slate-100 p-3 flex items-center justify-center relative overflow-hidden mb-2.5">
+            <img id="detailMainImage" src="" alt="" class="max-h-full max-w-full object-contain mix-blend-multiply transition-all duration-300">
+            <span id="detailBadgeChip" class="absolute top-2.5 left-2.5 bg-white/95 backdrop-blur-xs border border-titanium-300 text-obsidian text-[9px] font-extrabold uppercase tracking-wider px-2 py-0.5 rounded-full shadow-xs"></span>
+          </div>
+          <!-- Thumbnails Row -->
+          <div id="detailThumbnailsRow" class="flex items-center gap-2 overflow-x-auto no-scrollbar py-0.5">
+            <!-- Populated via JS -->
+          </div>
+        </div>
+
+        <!-- Video Player Viewport -->
+        <div id="detailVideoContainer" class="hidden">
+          <div class="w-full aspect-video rounded-2xl bg-black border border-slate-800 flex items-center justify-center overflow-hidden relative">
+            <video id="detailVideoPlayer" class="w-full h-full object-contain" controls preload="metadata" playsinline>
+              <source id="detailVideoSource" src="" type="video/mp4">
+              Video playback is not supported on this browser.
+            </video>
+          </div>
+          <p class="text-[10px] text-slate-400 mt-1 text-center">Touch play to inspect authentic Apple build quality & mechanics.</p>
+        </div>
+
+        <!-- Price & Rating Row -->
+        <div class="flex items-baseline justify-between pt-1">
+          <div>
+            <span class="text-xs text-slate-400 font-medium">$</span>
+            <span id="detailProductPrice" class="text-2xl font-black text-obsidian tracking-tight">0.00</span>
+            <span class="text-[11px] text-emerald-600 font-bold ml-2">• In Stock</span>
+          </div>
+          <div class="flex items-center gap-1 text-xs font-bold text-slate-700 bg-titanium-100 px-2 py-0.5 rounded-full">
+            <i class="ph-fill ph-star text-amberLuxe-500"></i>
+            <span id="detailProductRating">5.0</span>
+          </div>
+        </div>
+
+        <!-- Overview Description -->
+        <div>
+          <h4 class="text-[11px] font-bold text-slate-900 uppercase tracking-wider mb-1">Description</h4>
+          <p id="detailProductDescription" class="text-xs text-slate-600 leading-relaxed"></p>
+        </div>
+
+        <!-- Hardware Specs Matrix -->
+        <div class="bg-titanium-50/90 p-3 rounded-xl border border-titanium-200/80 space-y-1.5 text-[11px]">
+          <div class="flex justify-between">
+            <span class="text-slate-500">Ecosystem:</span>
+            <span id="detailTechCompatibility" class="font-bold text-obsidian text-right truncate pl-2">Apple Ecosystem</span>
+          </div>
+          <div class="flex justify-between">
+            <span class="text-slate-500">Materials:</span>
+            <span id="detailTechMaterials" class="font-bold text-obsidian text-right truncate pl-2">Aluminium & Titanium</span>
+          </div>
+          <div class="flex justify-between">
+            <span class="text-slate-500">In the Box:</span>
+            <span id="detailTechBox" class="font-bold text-obsidian text-right truncate pl-2">Official Accessory</span>
+          </div>
+        </div>
+
+        <!-- Optional AliExpress Direct Affiliate Offer -->
+        <div id="modalAliExpressContainer" class="hidden pt-1">
+          <a id="modalAliExpressLink" href="#" target="_blank" rel="noopener noreferrer" class="w-full py-2.5 px-3 rounded-xl text-xs font-bold text-amberLuxe-900 bg-amberLuxe-100/90 border border-amberLuxe-300 transition-all flex items-center justify-center gap-1.5 touch-press">
+            <i class="ph-bold ph-arrow-square-out text-sm text-amberLuxe-700"></i>
+            <span id="modalAliExpressLabel">View Offer on AliExpress</span>
+          </a>
+        </div>
+
+      </div>
+
+      <!-- Sticky Sheet Footer with Action Button -->
+      <div class="p-3 sm:p-5 border-t border-slate-100 bg-white">
+        <button id="modalAddToCartBtn" class="w-full py-3.5 bg-gradient-to-r from-obsidian to-deepSlate active:from-amberLuxe-700 active:to-amberLuxe-800 text-white font-bold text-xs sm:text-sm rounded-xl shadow-md transition-all flex items-center justify-center gap-2 touch-press">
+          <i class="ph-bold ph-handbag text-base"></i>
+          <span>Add to Bag & Proceed</span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <div id="cartDrawer" class="fixed inset-0 z-50 pointer-events-none transition-opacity duration-300 opacity-0">
+    <div id="cartBackdrop" class="absolute inset-0 bg-obsidian/50 backdrop-blur-xs pointer-events-auto" onclick="closeCartDrawer()"></div>
+    <div id="cartPanel" class="absolute bottom-0 left-0 right-0 sm:top-0 sm:bottom-0 sm:left-auto sm:right-0 sm:w-full sm:max-w-md bg-white rounded-t-3xl sm:rounded-none shadow-2xl flex flex-col pointer-events-auto transform translate-y-full sm:translate-y-0 sm:translate-x-full sheet-transition max-h-[92vh] sm:max-h-full" style="padding-bottom: max(0.5rem, var(--sab));">
+      
+      <!-- iOS Pull Bar on Mobile -->
+      <div class="pull-handle sm:hidden"></div>
+
+      <!-- Drawer Header -->
+      <div class="px-5 py-3 border-b border-slate-100 flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <i class="ph-bold ph-handbag text-xl text-amberLuxe-600"></i>
+          <h2 class="font-extrabold text-base sm:text-lg text-obsidian">Your Apple Bag</h2>
+          <span id="cartDrawerBadge" class="text-xs bg-titanium-100 text-amberLuxe-900 font-bold px-2 py-0.5 rounded-full">0</span>
+        </div>
+        <button onclick="closeCartDrawer()" class="w-8 h-8 rounded-full bg-slate-100 active:bg-slate-200 flex items-center justify-center text-slate-600 touch-press">
+          <i class="ph-bold ph-x text-sm"></i>
+        </button>
+      </div>
+
+      <!-- Free Shipping Gauge -->
+      <div class="bg-titanium-50 px-4 py-2.5 border-b border-titanium-200/60">
+        <div class="flex justify-between text-[11px] font-semibold mb-1">
+          <span id="freeShippingLabel" class="text-slate-700">Add $100 for Free Express Delivery</span>
+          <span id="freeShippingPercent" class="text-amberLuxe-700 font-bold">0%</span>
+        </div>
+        <div class="w-full bg-titanium-200 rounded-full h-1.5 overflow-hidden">
+          <div id="freeShippingBar" class="bg-gradient-to-r from-amberLuxe-600 to-amberLuxe-700 h-full transition-all duration-300" style="width: 0%;"></div>
+        </div>
+      </div>
+
+      <!-- Items List -->
+      <div id="cartItemsList" class="flex-1 overflow-y-auto ios-scroll p-4 space-y-3 divide-y divide-slate-100">
+        <!-- Rendered dynamically -->
+      </div>
+
+      <!-- Drawer Footer -->
+      <div class="p-4 border-t border-slate-100 bg-slate-50/70 space-y-2.5">
+        <!-- Promo Coupon -->
+        <div class="flex gap-2">
+          <input type="text" id="couponInput" placeholder="Promo (LUXE10)" class="flex-1 px-3 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none focus:border-amberLuxe-600 uppercase font-semibold">
+          <button id="applyCouponBtn" class="px-3 py-1.5 bg-obsidian text-white text-xs font-bold rounded-lg touch-press">Apply</button>
+        </div>
+        <p id="discountNotice" class="hidden text-[10px] font-semibold text-emerald-600 flex items-center gap-1">
+          <i class="ph-fill ph-tag"></i> 10% Privilege Discount Applied!
+        </p>
+
+        <!-- Subtotal calculation -->
+        <div class="space-y-1 text-xs text-slate-600">
+          <div class="flex justify-between">
+            <span>Subtotal</span>
+            <span id="cartDrawerSubtotal" class="font-bold text-obsidian">$0.00</span>
+          </div>
+          <div class="flex justify-between" id="discountRow" style="display: none;">
+            <span class="text-emerald-600">Privilege Deduction</span>
+            <span id="cartDrawerDiscount" class="font-bold text-emerald-600">-$0.00</span>
+          </div>
+          <div class="flex justify-between text-sm font-extrabold text-obsidian pt-1.5 border-t border-slate-200">
+            <span>Total</span>
+            <span id="cartDrawerTotal" class="text-amberLuxe-700">$0.00</span>
+          </div>
+        </div>
+
+        <button id="proceedCheckoutBtn" class="w-full py-3.5 bg-gradient-to-r from-obsidian to-deepSlate text-white font-bold text-xs sm:text-sm rounded-xl shadow-md transition-all flex items-center justify-center gap-2 touch-press">
+          <span>Checkout Securely</span>
+          <i class="ph-bold ph-lock-key"></i>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <div id="checkoutModal" class="fixed inset-0 z-50 hidden flex items-end sm:items-center justify-center p-0 sm:p-4 overflow-y-auto">
+    <div class="fixed inset-0 bg-obsidian/60 backdrop-blur-xs" onclick="closeCheckoutModal()"></div>
+    <div class="relative bg-white rounded-t-3xl sm:rounded-3xl max-w-lg w-full p-5 sm:p-7 shadow-modal z-10 border border-slate-200" style="padding-bottom: max(1rem, var(--sab));">
+      
+      <div class="pull-handle sm:hidden"></div>
+
+      <div class="flex justify-between items-start mb-4">
+        <div>
+          <h3 class="text-lg font-extrabold text-obsidian">Order Dispatch Details</h3>
+          <p class="text-[11px] text-slate-500">Delivered directly from Apple Gear Hub dispatch.</p>
+        </div>
+        <button onclick="closeCheckoutModal()" class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-600 touch-press">
+          <i class="ph-bold ph-x text-sm"></i>
+        </button>
+      </div>
+
+      <form id="checkoutForm" class="space-y-3">
+        <div>
+          <label class="block text-[11px] font-bold text-slate-700 mb-1">Full Name</label>
+          <input type="text" id="custName" required placeholder="e.g. David Sterling" class="w-full px-3 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:border-amberLuxe-600 focus:outline-none">
+        </div>
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <label class="block text-[11px] font-bold text-slate-700 mb-1">Email</label>
+            <input type="email" id="custEmail" required placeholder="david@icloud.com" class="w-full px-3 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:border-amberLuxe-600 focus:outline-none">
+          </div>
+          <div>
+            <label class="block text-[11px] font-bold text-slate-700 mb-1">Phone</label>
+            <input type="tel" id="custPhone" required placeholder="+1 555-019" class="w-full px-3 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:border-amberLuxe-600 focus:outline-none">
+          </div>
+        </div>
+        <div>
+          <label class="block text-[11px] font-bold text-slate-700 mb-1">Delivery Address</label>
+          <textarea id="custAddress" required rows="2" placeholder="Street, Apt/Suite, City, Postal Code, Country" class="w-full px-3 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:border-amberLuxe-600 focus:outline-none"></textarea>
+        </div>
+
+        <div class="bg-titanium-50 p-2.5 rounded-xl border border-titanium-200 text-xs flex justify-between items-center">
+          <span class="font-medium text-slate-600">Total Authorized:</span>
+          <span id="checkoutFinalAmount" class="font-black text-sm text-obsidian">$0.00</span>
+        </div>
+
+        <button type="submit" class="w-full py-3.5 bg-gradient-to-r from-obsidian to-deepSlate active:from-amberLuxe-700 active:to-amberLuxe-800 text-white font-bold text-xs rounded-xl shadow-md touch-press">
+          Transmit Direct Order
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <div id="mobileSearchSheet" class="fixed inset-x-0 top-0 z-50 bg-white/95 backdrop-blur-xl border-b border-slate-200 p-4 shadow-xl transform -translate-y-full transition-transform duration-300" style="padding-top: max(1rem, var(--sat));">
+    <div class="flex items-center gap-2">
+      <div class="relative flex-1">
+        <i class="ph ph-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-base"></i>
+        <input 
+          type="text" 
+          id="mobileSearchInput" 
+          placeholder="Search MagSafe, Apple Pencil, Bands..." 
+          class="w-full pl-9 pr-8 py-2.5 bg-slate-100 rounded-full text-xs text-slate-800 focus:bg-white focus:outline-none focus:ring-2 focus:ring-amberLuxe-500"
+        >
+        <button id="mobileClearSearchBtn" class="hidden absolute right-3 top-1/2 -translate-y-1/2 text-slate-400">
+          <i class="ph-bold ph-x-circle text-base"></i>
+        </button>
+      </div>
+      <button onclick="toggleMobileSearch(false)" class="text-xs font-bold text-slate-600 px-2 py-1 touch-press">
+        Cancel
+      </button>
+    </div>
+  </div>
+
+  <div id="pinModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4">
+    <div class="fixed inset-0 bg-obsidian/75 backdrop-blur-md" onclick="closePinModal()"></div>
+    <div id="pinBox" class="relative bg-white rounded-3xl max-w-xs w-full p-6 shadow-modal text-center z-10 border border-slate-200">
+      
+      <div class="w-11 h-11 bg-titanium-100 text-amberLuxe-700 rounded-2xl mx-auto flex items-center justify-center mb-3 border border-titanium-300">
+        <i class="ph-bold ph-key text-xl"></i>
+      </div>
+      
+      <h3 class="text-base font-extrabold text-obsidian">Authorized Access</h3>
+      <p class="text-[11px] text-slate-500 mt-0.5">Enter 4-digit master passkey.</p>
+      
+      <div class="my-4">
+        <input 
+          type="password" 
+          id="pinInput" 
+          maxlength="4" 
+          inputmode="numeric"
+          pattern="[0-9]*"
+          placeholder="••••" 
+          class="w-32 text-center text-2xl font-extrabold tracking-widest py-2 px-3 border-2 border-slate-200 rounded-2xl focus:border-amberLuxe-600 focus:outline-none"
+        >
+        <p id="pinErrorMsg" class="text-rose-500 text-[10px] font-semibold mt-1.5 hidden">Incorrect Passcode.</p>
+      </div>
+
+      <div class="flex gap-2">
+        <button onclick="closePinModal()" class="flex-1 py-2 text-xs font-bold text-slate-600 bg-slate-100 rounded-xl touch-press">Cancel</button>
+        <button onclick="submitPinCode()" class="flex-1 py-2 text-xs font-bold text-white bg-obsidian active:bg-amberLuxe-700 rounded-xl touch-press">Unlock</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="adminContainer" class="hidden min-h-screen bg-slate-100 text-slate-900 py-4 px-3 sm:px-6 lg:px-8" style="padding-top: max(1rem, var(--sat)); padding-bottom: max(2rem, var(--sab));">
+    <div class="max-w-7xl mx-auto space-y-4">
+      
+      <!-- Top Bar -->
+      <div class="bg-white rounded-2xl p-4 shadow-xs border border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div>
+          <div class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-obsidian text-titanium-200 text-[10px] font-bold uppercase tracking-wider mb-1">
+            <i class="ph-fill ph-lock-open text-amberLuxe-400"></i> Admin Session
+          </div>
+          <h2 class="text-lg sm:text-2xl font-black text-obsidian tracking-tight">Apple Gear Hub Manager</h2>
+        </div>
+        
+        <div class="flex items-center gap-2">
+          <button onclick="openNewProductModal()" class="flex-1 sm:flex-none px-3.5 py-2 bg-gradient-to-r from-amberLuxe-600 to-amberLuxe-700 text-white text-xs font-bold rounded-xl shadow-xs flex items-center justify-center gap-1.5 touch-press">
+            <i class="ph-bold ph-plus-circle text-sm"></i> Add Item
+          </button>
+          <button onclick="exitAdminView()" class="flex-1 sm:flex-none px-3.5 py-2 bg-obsidian text-white text-xs font-bold rounded-xl flex items-center justify-center gap-1.5 touch-press">
+            <i class="ph-bold ph-sign-out text-sm"></i> Lock & Exit
+          </button>
+        </div>
+      </div>
+
+      <!-- Quick Metrics -->
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-2.5">
+        <div class="bg-white p-3.5 rounded-2xl border border-slate-200 shadow-xs">
+          <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Gross Value</span>
+          <p class="text-lg sm:text-2xl font-black text-obsidian mt-0.5" id="adminMetricRevenue">$0.00</p>
+        </div>
+        <div class="bg-white p-3.5 rounded-2xl border border-slate-200 shadow-xs">
+          <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Pending Orders</span>
+          <p class="text-lg sm:text-2xl font-black text-amberLuxe-600 mt-0.5" id="adminMetricPending">0</p>
+        </div>
+        <div class="bg-white p-3.5 rounded-2xl border border-slate-200 shadow-xs">
+          <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Accepted</span>
+          <p class="text-lg sm:text-2xl font-black text-emerald-600 mt-0.5" id="adminMetricAccepted">0</p>
+        </div>
+        <div class="bg-white p-3.5 rounded-2xl border border-slate-200 shadow-xs">
+          <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Inventory</span>
+          <p class="text-lg sm:text-2xl font-black text-obsidian mt-0.5" id="adminMetricItems">0</p>
+        </div>
+      </div>
+
+      <!-- Orders Section (Mobile-First Cards + Desktop Table) -->
+      <div class="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden">
+        <div class="p-4 border-b border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+          <div>
+            <h3 class="font-black text-base text-obsidian">Store Customer Orders</h3>
+            <p class="text-[11px] text-slate-500">Live order checkout transmission log</p>
+          </div>
+          <div class="flex items-center gap-1.5" id="orderFilterPills">
+            <button onclick="filterAdminOrders('all')" class="text-xs font-bold px-3 py-1 rounded-lg bg-obsidian text-white">All</button>
+            <button onclick="filterAdminOrders('Pending')" class="text-xs font-bold px-3 py-1 rounded-lg bg-slate-100 text-slate-600">Pending</button>
+            <button onclick="filterAdminOrders('Accepted')" class="text-xs font-bold px-3 py-1 rounded-lg bg-slate-100 text-slate-600">Accepted</button>
+          </div>
+        </div>
+
+        <div id="adminOrdersContainer" class="p-3 sm:p-4 space-y-3">
+          <!-- Populated as responsive cards on mobile -->
+        </div>
+        <div id="noOrdersMessage" class="hidden text-center py-10 text-slate-400 text-xs">No orders received yet.</div>
+      </div>
+
+      <!-- Catalog Editor Section (Touch Cards) -->
+      <div class="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden">
+        <div class="p-4 border-b border-slate-200 flex items-center justify-between">
+          <div>
+            <h3 class="font-black text-base text-obsidian">Product Inventory & AliExpress Links</h3>
+            <p class="text-[11px] text-slate-500">Modify accessories, photos, videos, and partner offers</p>
+          </div>
+          <button onclick="restoreDefaultCatalog()" class="text-[11px] font-bold text-rose-600 hover:underline">
+            Reset Factory Catalog
+          </button>
+        </div>
+
+        <div id="adminProductsContainer" class="p-3 sm:p-4 space-y-2.5">
+          <!-- Populated via JS as touch-friendly cards -->
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div id="productEditModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
+    <div class="fixed inset-0 bg-obsidian/60 backdrop-blur-xs" onclick="closeProductEditModal()"></div>
+    <div class="relative bg-white rounded-3xl max-w-xl w-full p-5 sm:p-7 shadow-modal z-10 max-h-[92vh] overflow-y-auto border border-slate-200">
+      
+      <div class="flex justify-between items-center mb-4">
+        <div>
+          <h3 class="text-base sm:text-lg font-extrabold text-obsidian" id="editModalTitle">Edit Accessory</h3>
+          <p class="text-[10px] text-slate-500">Update specifications and video showcases.</p>
+        </div>
+        <button onclick="closeProductEditModal()" class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-600 touch-press">
+          <i class="ph-bold ph-x text-sm"></i>
+        </button>
+      </div>
+
+      <form id="productEditForm" class="space-y-3">
+        <input type="hidden" id="editProductId">
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+          <div>
+            <label class="block text-[10px] font-bold text-slate-700 mb-0.5">Product Title</label>
+            <input type="text" id="editTitle" required class="w-full px-3 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:border-amberLuxe-600 focus:outline-none">
+          </div>
+          <div>
+            <label class="block text-[10px] font-bold text-slate-700 mb-0.5">Category</label>
+            <select id="editCategory" class="w-full px-3 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:border-amberLuxe-600 focus:outline-none">
+              <option value="iPhone">iPhone</option>
+              <option value="Mac">Mac</option>
+              <option value="iPad">iPad</option>
+              <option value="Watch">Watch</option>
+              <option value="AirPods">AirPods</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-3 gap-2">
+          <div>
+            <label class="block text-[10px] font-bold text-slate-700 mb-0.5">Price ($)</label>
+            <input type="number" step="0.01" id="editPrice" required class="w-full px-2.5 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:border-amberLuxe-600 focus:outline-none">
+          </div>
+          <div>
+            <label class="block text-[10px] font-bold text-slate-700 mb-0.5">Rating (1-5)</label>
+            <input type="number" step="0.1" max="5" min="1" id="editRating" class="w-full px-2.5 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:border-amberLuxe-600 focus:outline-none">
+          </div>
+          <div>
+            <label class="block text-[10px] font-bold text-slate-700 mb-0.5">Badge</label>
+            <input type="text" id="editBadge" placeholder="Official" class="w-full px-2.5 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:border-amberLuxe-600 focus:outline-none">
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-[10px] font-bold text-slate-700 mb-0.5">Primary Image URL</label>
+          <input type="url" id="editImage" required class="w-full px-3 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:border-amberLuxe-600 focus:outline-none">
+        </div>
+
+        <div>
+          <label class="block text-[10px] font-bold text-slate-700 mb-0.5">Additional Gallery Images (Comma/Newline separated)</label>
+          <textarea id="editGallery" rows="2" placeholder="https://image1.jpg, https://image2.jpg" class="w-full px-3 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:border-amberLuxe-600 focus:outline-none"></textarea>
+        </div>
+
+        <div>
+          <label class="block text-[10px] font-bold text-slate-700 mb-0.5">Video Demo URL (.mp4)</label>
+          <input type="url" id="editVideo" placeholder="https://commondatastorage.googleapis.com/..." class="w-full px-3 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:border-amberLuxe-600 focus:outline-none">
+        </div>
+
+        <div>
+          <label class="block text-[10px] font-bold text-slate-700 mb-0.5">Overview Description</label>
+          <textarea id="editDescription" rows="2" class="w-full px-3 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:border-amberLuxe-600 focus:outline-none"></textarea>
+        </div>
+
+        <!-- AliExpress Partner Config -->
+        <div class="bg-titanium-50 p-3 rounded-xl border border-titanium-200 space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-obsidian">AliExpress Partner Offer</span>
+            <label class="relative inline-flex items-center cursor-pointer">
+              <input type="checkbox" id="editAliExpressEnabled" class="sr-only peer">
+              <div class="w-9 h-5 bg-slate-200 rounded-full peer peer-checked:after:translate-x-full peer-checked:bg-amberLuxe-600 after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all"></div>
+              <span class="ml-2 text-[10px] font-bold text-slate-600">Active</span>
+            </label>
+          </div>
+          <div>
+            <input type="url" id="editAliExpressUrl" placeholder="https://s.click.aliexpress.com/..." class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none">
+          </div>
+          <div>
+            <input type="text" id="editAliExpressLabel" placeholder="Button Label (e.g. Buy on AliExpress)" class="w-full px-2.5 py-1.5 text-xs bg-white border border-slate-200 rounded-lg focus:outline-none">
+          </div>
+        </div>
+
+        <div class="flex items-center justify-between pt-1">
+          <label class="flex items-center gap-2 cursor-pointer text-xs font-bold text-slate-700">
+            <input type="checkbox" id="editInStock" class="w-4 h-4 text-amberLuxe-600 rounded border-slate-300">
+            <span>In Stock</span>
+          </label>
+
+          <button type="submit" class="px-5 py-2.5 bg-obsidian text-white font-bold text-xs rounded-xl touch-press">
+            Save Changes
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <nav class="md:hidden fixed bottom-0 left-0 right-0 z-40 ios-glass border-t border-slate-200/90 shadow-dock flex items-center justify-around py-1.5" style="padding-bottom: max(0.5rem, var(--sab));">
+    
+    <!-- Store Home -->
+    <a href="#productsCatalog" class="flex flex-col items-center text-slate-600 hover:text-amberLuxe-700 py-1 px-3 touch-press">
+      <i class="ph-bold ph-squares-four text-xl"></i>
+      <span class="text-[9px] font-bold mt-0.5">Store</span>
+    </a>
+
+    <!-- Mobile Search Toggle -->
+    <button onclick="toggleMobileSearch(true)" class="flex flex-col items-center text-slate-600 hover:text-amberLuxe-700 py-1 px-3 touch-press">
+      <i class="ph-bold ph-magnifying-glass text-xl"></i>
+      <span class="text-[9px] font-bold mt-0.5">Search</span>
+    </button>
+
+    <!-- Category Trigger -->
+    <button onclick="document.getElementById('categoryFilterContainer').scrollIntoView({behavior: 'smooth'});" class="flex flex-col items-center text-slate-600 hover:text-amberLuxe-700 py-1 px-3 touch-press">
+      <i class="ph-bold ph-faders text-xl"></i>
+      <span class="text-[9px] font-bold mt-0.5">Filter</span>
+    </button>
+
+    <!-- Shopping Bag with Badge -->
+    <button onclick="openCartDrawer()" class="flex flex-col items-center text-slate-600 hover:text-amberLuxe-700 py-1 px-3 relative touch-press">
+      <div class="relative">
+        <i class="ph-bold ph-handbag text-xl"></i>
+        <span id="mobileCartBadge" class="absolute -top-1.5 -right-2 bg-gradient-to-r from-amberLuxe-600 to-amberLuxe-700 text-white text-[9px] font-extrabold h-4 min-w-[16px] px-1 rounded-full flex items-center justify-center ring-2 ring-white">0</span>
+      </div>
+      <span class="text-[9px] font-bold mt-0.5">Bag</span>
+    </button>
+
+  </nav>
+
+  <footer class="mt-auto border-t border-slate-200/80 bg-white py-8 px-4 text-center text-xs text-slate-400">
+    <div class="max-w-7xl mx-auto flex flex-col items-center gap-2">
+      <div class="flex items-center gap-2">
+        <div class="w-6 h-6 rounded-lg bg-obsidian flex items-center justify-center text-white">
+          <i class="ph-bold ph-apple-logo text-xs text-amberLuxe-400"></i>
+        </div>
+        <span class="font-bold text-obsidian text-xs">Apple Gear Hub // Titanium Edition</span>
+      </div>
+      <p class="text-[11px] text-slate-500">
+        Apple, iPhone, Mac, iPad, Apple Watch, and AirPods are trademarks of Apple Inc.
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    /* Default Real Apple Catalog Data */
+    const DEFAULT_PRODUCTS = [
+      {
+        id: "agh_magsafe_25w",
+        title: "Apple MagSafe Charger (25W Fast Qi2)",
+        category: "iPhone",
+        price: 39.00,
+        rating: 4.9,
+        badge: "Official 25W Qi2",
+        inStock: true,
+        image: "https://images.unsplash.com/photo-1616440347437-b1c73416efc2?auto=format&fit=crop&w=600&q=80",
+        gallery: [
+          "https://images.unsplash.com/photo-1616440347437-b1c73416efc2?auto=format&fit=crop&w=600&q=80",
+          "https://images.unsplash.com/photo-1583394838336-acd977736f90?auto=format&fit=crop&w=600&q=80"
+        ],
+        videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
+        description: "Official 25W MagSafe wireless charging puck with braided 1m cable. Delivers up to 50% battery in 30 minutes for iPhone 16 and 15 series.",
+        compatibility: "iPhone 16 / 15 / 14 / 13 / 12, AirPods Pro 2",
+        materials: "Anodized Aluminium & Woven Braided Cable",
+        boxContent: "MagSafe Charger (1m Braided Cable)",
+        aliExpress: {
+          enabled: true,
+          label: "View Offer on AliExpress",
+          url: "https://s.click.aliexpress.com/e/_magsafeExample"
+        }
+      },
+      {
+        id: "agh_ocean_band_titanium",
+        title: "Apple Watch Ultra Ocean Band (Desert Sand 49mm)",
+        category: "Watch",
+        price: 99.00,
+        rating: 5.0,
+        badge: "Titanium Buckle",
+        inStock: true,
+        image: "https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?auto=format&fit=crop&w=600&q=80",
+        gallery: [
+          "https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?auto=format&fit=crop&w=600&q=80",
+          "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=600&q=80"
+        ],
+        videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4",
+        description: "Molded from high-performance fluoroelastomer with tubular geometry that can stretch over a wetsuit. Corrosion-resistant Grade 5 titanium buckle.",
+        compatibility: "Apple Watch Ultra 2, Ultra (49mm), Series 10/9/8 (45mm/46mm)",
+        materials: "Fluoroelastomer & Grade 5 Titanium",
+        boxContent: "Ocean Band Strap with Adjustable Titanium Loop",
+        aliExpress: {
+          enabled: true,
+          label: "Get on AliExpress",
+          url: "https://s.click.aliexpress.com/e/_oceanBandExample"
+        }
+      },
+      {
+        id: "agh_apple_pencil_pro",
+        title: "Apple Pencil Pro (Squeeze & Barrel Roll)",
+        category: "iPad",
+        price: 129.00,
+        rating: 4.9,
+        badge: "Pro Haptics",
+        inStock: true,
+        image: "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=600&q=80",
+        gallery: [
+          "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=600&q=80",
+          "https://images.unsplash.com/photo-1563206767-5b18f218e8de?auto=format&fit=crop&w=600&q=80"
+        ],
+        videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4",
+        description: "Advanced stylus with sensor squeeze recognition to switch tools, internal gyroscope for barrel roll orientation, and custom haptic pulses.",
+        compatibility: "iPad Pro 13 (M4), iPad Pro 11 (M4), iPad Air 11 & 13 (M2)",
+        materials: "Matte Finished Polycarbonate & Rare Earth Magnets",
+        boxContent: "Apple Pencil Pro, Quick Start Guide",
+        aliExpress: {
+          enabled: false,
+          label: "Check on AliExpress",
+          url: ""
+        }
+      },
+      {
+        id: "agh_magic_keyboard_num",
+        title: "Magic Keyboard with Touch ID & Numeric Keypad",
+        category: "Mac",
+        price: 199.00,
+        rating: 4.8,
+        badge: "USB-C Model",
+        inStock: true,
+        image: "https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=600&q=80",
+        gallery: [
+          "https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=600&q=80",
+          "https://images.unsplash.com/photo-1618384887929-16ec33fab9ef?auto=format&fit=crop&w=600&q=80"
+        ],
+        videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
+        description: "Wireless keyboard with scissor mechanism, integrated Touch ID sensor, and extended layout for spreadsheets and finance.",
+        compatibility: "Mac Studio, MacBook Pro, MacBook Air, iMac (Apple Silicon)",
+        materials: "100% Recycled Aluminium Chassis",
+        boxContent: "Magic Keyboard, Braided USB-C to USB-C Cable",
+        aliExpress: {
+          enabled: true,
+          label: "Buy on AliExpress",
+          url: "https://s.click.aliexpress.com/e/_keyboardExample"
+        }
+      },
+      {
+        id: "agh_airpods_pro2_case",
+        title: "AirPods Pro 2 MagSafe Case (USB-C & Find My)",
+        category: "AirPods",
+        price: 99.00,
+        rating: 4.8,
+        badge: "U1 Speaker",
+        inStock: true,
+        image: "https://images.unsplash.com/photo-1600294037681-c80b4cb5b434?auto=format&fit=crop&w=600&q=80",
+        gallery: [
+          "https://images.unsplash.com/photo-1600294037681-c80b4cb5b434?auto=format&fit=crop&w=600&q=80"
+        ],
+        videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4",
+        description: "Official MagSafe charging case with U1 chip for precision Find My tracking, built-in speaker chime, and IP54 dust resistance.",
+        compatibility: "AirPods Pro 2 (USB-C & Lightning)",
+        materials: "Gloss Ceramic White Shell & Rare Earth Magnets",
+        boxContent: "AirPods Pro 2 MagSafe Charging Case",
+        aliExpress: {
+          enabled: true,
+          label: "Order on AliExpress",
+          url: "https://s.click.aliexpress.com/e/_airpodsExample"
+        }
+      },
+      {
+        id: "agh_magic_keyboard_ipad",
+        title: "Magic Keyboard for iPad Pro 13-inch (M4 Aluminium)",
+        category: "iPad",
+        price: 349.00,
+        rating: 4.9,
+        badge: "Aluminium Rest",
+        inStock: true,
+        image: "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?auto=format&fit=crop&w=600&q=80",
+        gallery: [
+          "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?auto=format&fit=crop&w=600&q=80"
+        ],
+        videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4",
+        description: "Cantilever floating hinge design featuring an anodized aluminium palm rest, 14-key function row, and glass trackpad with tactile response.",
+        compatibility: "iPad Pro 13-inch (M4 generation)",
+        materials: "Machined Aluminium & Premium Polyurethane",
+        boxContent: "Magic Keyboard for iPad Pro 13-inch",
+        aliExpress: {
+          enabled: true,
+          label: "AliExpress Deal",
+          url: "https://s.click.aliexpress.com/e/_ipadKeyExample"
+        }
+      }
+    ];
+
+    /* Storage Keys */
+    const STORAGE_KEY_PRODUCTS = "agh_products_titanium_mobile_v1";
+    const STORAGE_KEY_ORDERS = "agh_orders_titanium_mobile_v1";
+    const STORAGE_KEY_CART = "agh_cart_titanium_mobile_v1";
+
+    /* State */
+    let products = [];
+    let orders = [];
+    let cart = [];
+    let currentCategory = "all";
+    let searchQuery = "";
+    let sortMode = "featured";
+    let discountApplied = false;
+    let activeDetailProduct = null;
+
+    /* Stealth 5-Click Gate */
+    let logoClickCount = 0;
+    let logoClickTimer = null;
+    const SECRET_PIN = "1234";
+
+    /* App Initialization */
+    window.addEventListener("DOMContentLoaded", () => {
+      loadStorageData();
+      setupEventListeners();
+      renderStoreCatalog();
+      renderCart();
+      updateAdminDashboard();
+    });
+
+    function loadStorageData() {
+      const storedProducts = localStorage.getItem(STORAGE_KEY_PRODUCTS);
+      if (storedProducts) {
+        try { products = JSON.parse(storedProducts); } catch (e) { products = DEFAULT_PRODUCTS; }
+      } else {
+        products = DEFAULT_PRODUCTS;
+        saveProducts();
+      }
+
+      const storedOrders = localStorage.getItem(STORAGE_KEY_ORDERS);
+      if (storedOrders) {
+        try { orders = JSON.parse(storedOrders); } catch (e) { orders = []; }
+      }
+
+      const storedCart = localStorage.getItem(STORAGE_KEY_CART);
+      if (storedCart) {
+        try { cart = JSON.parse(storedCart); } catch (e) { cart = []; }
+      }
+    }
+
+    function saveProducts() {
+      localStorage.setItem(STORAGE_KEY_PRODUCTS, JSON.stringify(products));
+      renderStoreCatalog();
+      updateAdminDashboard();
+    }
+
+    function saveOrders() {
+      localStorage.setItem(STORAGE_KEY_ORDERS, JSON.stringify(orders));
+      updateAdminDashboard();
+    }
+
+    function saveCart() {
+      localStorage.setItem(STORAGE_KEY_CART, JSON.stringify(cart));
+      renderCart();
+    }
+
+    /* Event Listeners */
+    function setupEventListeners() {
+      // Secret 5-Tap on Brand Logo (Mobile & Desktop)
+      const logo = document.getElementById("brandLogoTrigger");
+      logo.addEventListener("click", () => {
+        logoClickCount++;
+        clearTimeout(logoClickTimer);
+        
+        logoClickTimer = setTimeout(() => {
+          logoClickCount = 0;
+        }, 3500);
+
+        if (logoClickCount >= 5) {
+          logoClickCount = 0;
+          clearTimeout(logoClickTimer);
+          openPinModal();
+        }
+      });
+
+      // PIN Enter key
+      document.getElementById("pinInput").addEventListener("keypress", (e) => {
+        if (e.key === "Enter") submitPinCode();
+      });
+
+      // Category filter buttons
+      document.querySelectorAll(".cat-pill").forEach(button => {
+        button.addEventListener("click", () => {
+          document.querySelectorAll(".cat-pill").forEach(b => {
+            b.classList.remove("active", "bg-obsidian", "text-white");
+            b.classList.add("bg-white", "text-slate-600");
+          });
+          button.classList.add("active", "bg-obsidian", "text-white");
+          button.classList.remove("bg-white", "text-slate-600");
+          currentCategory = button.getAttribute("data-cat");
+          renderStoreCatalog();
+        });
+      });
+
+      // Desktop & Mobile Search
+      const setupSearchSync = (inputEl, clearBtn) => {
+        inputEl.addEventListener("input", (e) => {
+          searchQuery = e.target.value.toLowerCase().trim();
+          if (searchQuery.length > 0) {
+            clearBtn.classList.remove("hidden");
+          } else {
+            clearBtn.classList.add("hidden");
+          }
+          // Sync with other search input
+          if (inputEl.id === "mobileSearchInput") {
+            document.getElementById("desktopSearchInput").value = e.target.value;
+          } else {
+            document.getElementById("mobileSearchInput").value = e.target.value;
+          }
+          renderStoreCatalog();
+        });
+
+        clearBtn.addEventListener("click", () => {
+          inputEl.value = "";
+          searchQuery = "";
+          clearBtn.classList.add("hidden");
+          document.getElementById("desktopSearchInput").value = "";
+          document.getElementById("mobileSearchInput").value = "";
+          renderStoreCatalog();
+        });
+      };
+
+      setupSearchSync(document.getElementById("desktopSearchInput"), document.getElementById("desktopClearSearchBtn"));
+      setupSearchSync(document.getElementById("mobileSearchInput"), document.getElementById("mobileClearSearchBtn"));
+
+      // Sort
+      document.getElementById("sortSelect").addEventListener("change", (e) => {
+        sortMode = e.target.value;
+        renderStoreCatalog();
+      });
+
+      // Desktop Cart
+      document.getElementById("desktopOpenCartBtn").addEventListener("click", openCartDrawer);
+
+      // Promo Code
+      document.getElementById("applyCouponBtn").addEventListener("click", () => {
+        const val = document.getElementById("couponInput").value.trim().toUpperCase();
+        if (val === "LUXE10" || val === "GEAR10") {
+          discountApplied = true;
+          document.getElementById("discountNotice").classList.remove("hidden");
+          renderCart();
+        } else {
+          alert("Invalid coupon. Please enter LUXE10 for 10% complimentary privilege.");
+        }
+      });
+
+      // Proceed to checkout modal
+      document.getElementById("proceedCheckoutBtn").addEventListener("click", () => {
+        if (cart.length === 0) {
+          alert("Your Apple bag is empty! Add products first.");
+          return;
+        }
+        closeCartDrawer();
+        openCheckoutModal();
+      });
+
+      document.getElementById("checkoutForm").addEventListener("submit", handleCheckoutSubmit);
+      document.getElementById("productEditForm").addEventListener("submit", handleProductSave);
+
+      // Modal Add To Cart
+      document.getElementById("modalAddToCartBtn").addEventListener("click", () => {
+        if (activeDetailProduct) {
+          addToCart(activeDetailProduct.id);
+          closeProductDetailModal();
+        }
+      });
+    }
+
+    /* Mobile Search Slide-Down Sheet */
+    function toggleMobileSearch(show) {
+      const sheet = document.getElementById("mobileSearchSheet");
+      const input = document.getElementById("mobileSearchInput");
+      if (show) {
+        sheet.classList.remove("-translate-y-full");
+        setTimeout(() => input.focus(), 150);
+      } else {
+        sheet.classList.add("-translate-y-full");
+        input.blur();
+      }
+    }
+
+    /* Secret PIN Gate Functions */
+    function openPinModal() {
+      const pinModal = document.getElementById("pinModal");
+      const pinInput = document.getElementById("pinInput");
+      const errorMsg = document.getElementById("pinErrorMsg");
+      errorMsg.classList.add("hidden");
+      pinInput.value = "";
+      pinModal.classList.remove("hidden");
+      setTimeout(() => pinInput.focus(), 150);
+    }
+
+    function closePinModal() {
+      document.getElementById("pinModal").classList.add("hidden");
+    }
+
+    function submitPinCode() {
+      const pin = document.getElementById("pinInput").value;
+      const errorMsg = document.getElementById("pinErrorMsg");
+      if (pin === SECRET_PIN) {
+        closePinModal();
+        enterAdminView();
+      } else {
+        errorMsg.classList.remove("hidden");
+        const pinBox = document.getElementById("pinBox");
+        pinBox.classList.add("animate-pulse");
+        setTimeout(() => pinBox.classList.remove("animate-pulse"), 500);
+      }
+    }
+
+    function enterAdminView() {
+      document.querySelector("header").classList.add("hidden");
+      document.querySelector("section").classList.add("hidden");
+      document.getElementById("productsCatalog").classList.add("hidden");
+      document.querySelector("footer").classList.add("hidden");
+      document.querySelector("nav").classList.add("hidden");
+      document.getElementById("adminContainer").classList.remove("hidden");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      updateAdminDashboard();
+    }
+
+    function exitAdminView() {
+      document.getElementById("adminContainer").classList.add("hidden");
+      document.querySelector("header").classList.remove("hidden");
+      document.querySelector("section").classList.remove("hidden");
+      document.getElementById("productsCatalog").classList.remove("hidden");
+      document.querySelector("footer").classList.remove("hidden");
+      document.querySelector("nav").classList.remove("hidden");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    /* Store Catalog Rendering (Smartphone Optimized) */
+    function renderStoreCatalog() {
+      const grid = document.getElementById("productsGrid");
+      const emptyState = document.getElementById("noProductsFound");
+      const counterText = document.getElementById("productCounterText");
+
+      let filtered = products.filter(p => {
+        const matchesCategory = currentCategory === "all" || p.category.toLowerCase() === currentCategory.toLowerCase();
+        const matchesSearch = p.title.toLowerCase().includes(searchQuery) || 
+                              (p.description && p.description.toLowerCase().includes(searchQuery)) ||
+                              p.category.toLowerCase().includes(searchQuery);
+        return matchesCategory && matchesSearch;
+      });
+
+      if (sortMode === "price-asc") filtered.sort((a, b) => a.price - b.price);
+      else if (sortMode === "price-desc") filtered.sort((a, b) => b.price - a.price);
+      else if (sortMode === "rating") filtered.sort((a, b) => b.rating - a.rating);
+
+      counterText.textContent = `${filtered.length} items`;
+
+      if (filtered.length === 0) {
+        grid.innerHTML = "";
+        emptyState.classList.remove("hidden");
+        return;
+      }
+
+      emptyState.classList.add("hidden");
+
+      grid.innerHTML = filtered.map(item => {
+        const hasAli = item.aliExpress && item.aliExpress.enabled && item.aliExpress.url;
+        return `
+          <div class="bg-white rounded-2xl border border-slate-200/90 p-2.5 sm:p-4 shadow-xs flex flex-col justify-between group touch-press">
+            <div>
+              <!-- Product Image Container -->
+              <div onclick="openProductDetailModal('${item.id}')" class="relative w-full aspect-square rounded-xl bg-titanium-50/70 border border-slate-100 overflow-hidden mb-2 flex items-center justify-center p-2 cursor-pointer">
+                <img src="${item.image}" alt="${item.title}" class="w-full h-full object-contain mix-blend-multiply transition-transform duration-300 group-hover:scale-105" loading="lazy">
+                
+                ${item.badge ? `
+                  <span class="absolute top-1.5 left-1.5 bg-white/95 backdrop-blur-xs border border-titanium-300 text-obsidian text-[8px] sm:text-[9px] font-extrabold uppercase tracking-wider px-1.5 py-0.5 rounded-full shadow-xs">
+                    ${item.badge}
+                  </span>
+                ` : ''}
+
+                <div class="absolute bottom-1.5 right-1.5 bg-white/95 backdrop-blur-xs border border-slate-200 text-[9px] sm:text-[10px] font-bold text-slate-700 px-1.5 py-0.5 rounded-full flex items-center gap-0.5 shadow-xs">
+                  <i class="ph-fill ph-star text-amberLuxe-500 text-[10px]"></i> ${item.rating.toFixed(1)}
+                </div>
+              </div>
+
+              <!-- Product Metadata -->
+              <div class="space-y-0.5">
+                <span class="text-[9px] sm:text-[10px] font-bold text-amberLuxe-700 uppercase tracking-widest">${item.category}</span>
+                <h3 onclick="openProductDetailModal('${item.id}')" class="font-extrabold text-obsidian text-xs leading-tight line-clamp-2 cursor-pointer hover:text-amberLuxe-700 transition-colors">${item.title}</h3>
+              </div>
+            </div>
+
+            <!-- Price & Touch Controls -->
+            <div class="mt-2.5 pt-2 border-t border-slate-100 space-y-1.5">
+              <div class="flex items-baseline justify-between">
+                <div>
+                  <span class="text-[9px] text-slate-400 font-medium">$</span>
+                  <span class="text-sm sm:text-base font-black text-obsidian tracking-tight">${item.price.toFixed(2)}</span>
+                </div>
+                ${item.inStock ? `
+                  <span class="text-[9px] font-bold text-emerald-600 flex items-center gap-0.5">
+                    <span class="w-1 h-1 rounded-full bg-emerald-500"></span> In Stock
+                  </span>
+                ` : `
+                  <span class="text-[9px] font-bold text-rose-500">Sold Out</span>
+                `}
+              </div>
+
+              <!-- Add to Bag Touch Button -->
+              <button 
+                onclick="addToCart('${item.id}')" 
+                ${!item.inStock ? 'disabled' : ''}
+                class="w-full py-2 px-2.5 rounded-xl text-[11px] font-bold transition-all flex items-center justify-center gap-1 ${item.inStock ? 'bg-obsidian text-white shadow-xs' : 'bg-slate-100 text-slate-400 cursor-not-allowed'}"
+              >
+                <i class="ph-bold ph-handbag text-xs"></i>
+                <span>${item.inStock ? 'Add to Bag' : 'Out of Stock'}</span>
+              </button>
+
+              <!-- Optional AliExpress Touch Button -->
+              ${hasAli ? `
+                <a 
+                  href="${item.aliExpress.url}" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  class="w-full py-1.5 px-2 rounded-xl text-[10px] font-bold text-amberLuxe-900 bg-amberLuxe-50 hover:bg-amberLuxe-100 border border-amberLuxe-200/80 transition-all flex items-center justify-center gap-1"
+                >
+                  <i class="ph-bold ph-arrow-square-out text-xs text-amberLuxe-700"></i>
+                  <span class="truncate">${item.aliExpress.label || 'AliExpress'}</span>
+                </a>
+              ` : ''}
+            </div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    function resetFilters() {
+      searchQuery = "";
+      document.getElementById("desktopSearchInput").value = "";
+      document.getElementById("mobileSearchInput").value = "";
+      document.getElementById("desktopClearSearchBtn").classList.add("hidden");
+      document.getElementById("mobileClearSearchBtn").classList.add("hidden");
+      document.querySelector('[data-cat="all"]').click();
+    }
+
+    /* Product Detail Bottom-Sheet Controls */
+    function openProductDetailModal(productId) {
+      const product = products.find(p => p.id === productId);
+      if (!product) return;
+      activeDetailProduct = product;
+
+      document.getElementById("modalCategoryBadge").textContent = `Apple // ${product.category}`;
+      document.getElementById("modalProductTitle").textContent = product.title;
+      document.getElementById("detailProductPrice").textContent = product.price.toFixed(2);
+      document.getElementById("detailProductRating").textContent = product.rating.toFixed(1);
+      document.getElementById("detailProductDescription").textContent = product.description || "Official accessory designed for seamless performance in the Apple ecosystem.";
+      document.getElementById("detailMainImage").src = product.image;
+      document.getElementById("detailBadgeChip").textContent = product.badge || "Official Apple";
+
+      document.getElementById("detailTechCompatibility").textContent = product.compatibility || "Universal Apple Ecosystem";
+      document.getElementById("detailTechMaterials").textContent = product.materials || "Anodized Aluminium & Microtwill";
+      document.getElementById("detailTechBox").textContent = product.boxContent || "Accessory, Documentation";
+
+      // Gallery Thumbnails
+      const thumbsContainer = document.getElementById("detailThumbnailsRow");
+      const gallery = product.gallery && product.gallery.length > 0 ? product.gallery : [product.image];
+      thumbsContainer.innerHTML = gallery.map((imgUrl, i) => `
+        <button onclick="switchMainDetailImage('${imgUrl}')" class="w-11 h-11 rounded-xl bg-slate-50 border ${i === 0 ? 'border-amberLuxe-600' : 'border-slate-200'} p-1 flex-shrink-0 flex items-center justify-center overflow-hidden touch-press">
+          <img src="${imgUrl}" class="max-h-full max-w-full object-contain mix-blend-multiply">
+        </button>
+      `).join("");
+
+      // Video
+      const videoPlayer = document.getElementById("detailVideoPlayer");
+      const videoSrc = document.getElementById("detailVideoSource");
+      if (product.videoUrl) {
+        videoSrc.src = product.videoUrl;
+        videoPlayer.load();
+      }
+
+      // AliExpress Button
+      const aliContainer = document.getElementById("modalAliExpressContainer");
+      const aliLink = document.getElementById("modalAliExpressLink");
+      const aliLabel = document.getElementById("modalAliExpressLabel");
+      if (product.aliExpress && product.aliExpress.enabled && product.aliExpress.url) {
+        aliLink.href = product.aliExpress.url;
+        aliLabel.textContent = product.aliExpress.label || "Order on AliExpress Partner Offer";
+        aliContainer.classList.remove("hidden");
+      } else {
+        aliContainer.classList.add("hidden");
+      }
+
+      switchDetailTab('photos');
+
+      // Slide-Up Bottom Sheet Trigger
+      const sheet = document.getElementById("productDetailSheet");
+      const panel = document.getElementById("detailPanel");
+      sheet.classList.remove("pointer-events-none", "opacity-0");
+      sheet.classList.add("opacity-100");
+      panel.classList.remove("translate-y-full");
+    }
+
+    function closeProductDetailModal() {
+      const sheet = document.getElementById("productDetailSheet");
+      const panel = document.getElementById("detailPanel");
+      sheet.classList.add("opacity-0");
+      panel.classList.add("translate-y-full");
+      setTimeout(() => sheet.classList.add("pointer-events-none"), 300);
+
+      const videoPlayer = document.getElementById("detailVideoPlayer");
+      if (videoPlayer) videoPlayer.pause();
+    }
+
+    function switchMainDetailImage(url) {
+      document.getElementById("detailMainImage").src = url;
+    }
+
+    function switchDetailTab(tab) {
+      const photosContainer = document.getElementById("detailPhotosContainer");
+      const videoContainer = document.getElementById("detailVideoContainer");
+      const btnPhotos = document.getElementById("tabBtnPhotos");
+      const btnVideo = document.getElementById("tabBtnVideo");
+      const videoPlayer = document.getElementById("detailVideoPlayer");
+
+      if (tab === 'photos') {
+        photosContainer.classList.remove("hidden");
+        videoContainer.classList.add("hidden");
+        btnPhotos.className = "flex-1 py-1.5 rounded-lg text-xs font-bold bg-white text-obsidian shadow-xs flex items-center justify-center gap-1.5 transition-all";
+        btnVideo.className = "flex-1 py-1.5 rounded-lg text-xs font-bold text-slate-600 hover:text-obsidian flex items-center justify-center gap-1.5 transition-all";
+        if (videoPlayer) videoPlayer.pause();
+      } else {
+        photosContainer.classList.add("hidden");
+        videoContainer.classList.remove("hidden");
+        btnVideo.className = "flex-1 py-1.5 rounded-lg text-xs font-bold bg-white text-obsidian shadow-xs flex items-center justify-center gap-1.5 transition-all";
+        btnPhotos.className = "flex-1 py-1.5 rounded-lg text-xs font-bold text-slate-600 hover:text-obsidian flex items-center justify-center gap-1.5 transition-all";
+        if (videoPlayer) videoPlayer.play().catch(() => {});
+      }
+    }
+
+    /* Cart Operations */
+    function addToCart(productId) {
+      const product = products.find(p => p.id === productId);
+      if (!product) return;
+
+      const existing = cart.find(item => item.id === productId);
+      if (existing) {
+        existing.quantity++;
+      } else {
+        cart.push({
+          id: product.id,
+          title: product.title,
+          price: product.price,
+          image: product.image,
+          quantity: 1
+        });
+      }
+
+      saveCart();
+      openCartDrawer();
+    }
+
+    function updateCartQuantity(productId, delta) {
+      const idx = cart.findIndex(item => item.id === productId);
+      if (idx > -1) {
+        cart[idx].quantity += delta;
+        if (cart[idx].quantity <= 0) cart.splice(idx, 1);
+      }
+      saveCart();
+    }
+
+    function removeFromCart(productId) {
+      cart = cart.filter(item => item.id !== productId);
+      saveCart();
+    }
+
+    function renderCart() {
+      const itemsContainer = document.getElementById("cartItemsList");
+      const desktopBadge = document.getElementById("desktopCartBadge");
+      const mobileBadge = document.getElementById("mobileCartBadge");
+      const drawerBadge = document.getElementById("cartDrawerBadge");
+      const subtotalEl = document.getElementById("cartDrawerSubtotal");
+      const totalEl = document.getElementById("cartDrawerTotal");
+      const discountRow = document.getElementById("discountRow");
+      const discountEl = document.getElementById("cartDrawerDiscount");
+      const freeShippingBar = document.getElementById("freeShippingBar");
+      const freeShippingLabel = document.getElementById("freeShippingLabel");
+      const freeShippingPercent = document.getElementById("freeShippingPercent");
+
+      const totalItems = cart.reduce((sum, i) => sum + i.quantity, 0);
+      const subtotal = cart.reduce((sum, i) => sum + (i.price * i.quantity), 0);
+      const discount = discountApplied ? subtotal * 0.10 : 0;
+      const total = subtotal - discount;
+
+      desktopBadge.textContent = totalItems;
+      mobileBadge.textContent = totalItems;
+      drawerBadge.textContent = totalItems;
+      subtotalEl.textContent = `$${subtotal.toFixed(2)}`;
+      totalEl.textContent = `$${total.toFixed(2)}`;
+
+      if (discountApplied) {
+        discountRow.style.display = "flex";
+        discountEl.textContent = `-$${discount.toFixed(2)}`;
+      } else {
+        discountRow.style.display = "none";
+      }
+
+      // $100 Free Delivery Gauge
+      const freeShipThreshold = 100;
+      const pct = Math.min(100, Math.round((subtotal / freeShipThreshold) * 100));
+      freeShippingBar.style.width = `${pct}%`;
+      freeShippingPercent.textContent = `${pct}%`;
+
+      if (subtotal >= freeShipThreshold) {
+        freeShippingLabel.textContent = "Unlocked: Free Express Delivery";
+      } else {
+        const remaining = (freeShipThreshold - subtotal).toFixed(2);
+        freeShippingLabel.textContent = `Add $${remaining} for Free Express`;
+      }
+
+      if (cart.length === 0) {
+        itemsContainer.innerHTML = `
+          <div class="text-center py-10 text-slate-400">
+            <i class="ph ph-handbag text-3xl mb-1 block"></i>
+            <p class="text-xs font-semibold">Your bag is empty.</p>
+          </div>
+        `;
+        return;
+      }
+
+      itemsContainer.innerHTML = cart.map(item => `
+        <div class="pt-3 first:pt-0 flex gap-2.5 items-center">
+          <div class="w-12 h-12 rounded-xl bg-titanium-50 border border-slate-200 p-1 flex-shrink-0 flex items-center justify-center">
+            <img src="${item.image}" alt="${item.title}" class="max-h-full max-w-full object-contain mix-blend-multiply">
+          </div>
+          <div class="flex-1 min-w-0">
+            <h4 class="text-xs font-bold text-obsidian truncate">${item.title}</h4>
+            <span class="text-xs font-bold text-amberLuxe-700 block mt-0.5">$${item.price.toFixed(2)}</span>
+            <div class="flex items-center gap-2 mt-1.5">
+              <div class="flex items-center border border-slate-200 rounded-lg bg-white overflow-hidden">
+                <button onclick="updateCartQuantity('${item.id}', -1)" class="w-5 h-5 flex items-center justify-center text-slate-600 active:bg-slate-100">
+                  <i class="ph-bold ph-minus text-[9px]"></i>
+                </button>
+                <span class="px-2 text-xs font-bold text-slate-800">${item.quantity}</span>
+                <button onclick="updateCartQuantity('${item.id}', 1)" class="w-5 h-5 flex items-center justify-center text-slate-600 active:bg-slate-100">
+                  <i class="ph-bold ph-plus text-[9px]"></i>
+                </button>
+              </div>
+              <button onclick="removeFromCart('${item.id}')" class="text-slate-400 hover:text-rose-500 text-xs">
+                <i class="ph-bold ph-trash"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    function openCartDrawer() {
+      const drawer = document.getElementById("cartDrawer");
+      const panel = document.getElementById("cartPanel");
+      drawer.classList.remove("pointer-events-none", "opacity-0");
+      drawer.classList.add("opacity-100");
+      panel.classList.remove("translate-y-full", "sm:translate-x-full");
+    }
+
+    function closeCartDrawer() {
+      const drawer = document.getElementById("cartDrawer");
+      const panel = document.getElementById("cartPanel");
+      drawer.classList.add("opacity-0");
+      panel.classList.add("translate-y-full", "sm:translate-x-full");
+      setTimeout(() => drawer.classList.add("pointer-events-none"), 300);
+    }
+
+    /* Checkout Modal */
+    function openCheckoutModal() {
+      const subtotal = cart.reduce((sum, i) => sum + (i.price * i.quantity), 0);
+      const discount = discountApplied ? subtotal * 0.10 : 0;
+      const total = subtotal - discount;
+      document.getElementById("checkoutFinalAmount").textContent = `$${total.toFixed(2)}`;
+      document.getElementById("checkoutModal").classList.remove("hidden");
+    }
+
+    function closeCheckoutModal() {
+      document.getElementById("checkoutModal").classList.add("hidden");
+    }
+
+    function handleCheckoutSubmit(e) {
+      e.preventDefault();
+      const subtotal = cart.reduce((sum, i) => sum + (i.price * i.quantity), 0);
+      const discount = discountApplied ? subtotal * 0.10 : 0;
+      const total = subtotal - discount;
+
+      const newOrder = {
+        id: "AGH-" + Math.floor(100000 + Math.random() * 900000),
+        date: new Date().toLocaleDateString("en-US", { month: "short", day: "numeric", hour: "2-digit", minute: "2-digit" }),
+        customer: {
+          name: document.getElementById("custName").value,
+          email: document.getElementById("custEmail").value,
+          phone: document.getElementById("custPhone").value,
+          address: document.getElementById("custAddress").value
+        },
+        items: [...cart],
+        totalAmount: total,
+        status: "Pending"
+      };
+
+      orders.unshift(newOrder);
+      saveOrders();
+
+      cart = [];
+      discountApplied = false;
+      saveCart();
+
+      closeCheckoutModal();
+      document.getElementById("checkoutForm").reset();
+      alert(`Order Confirmed! Reference #${newOrder.id} has been transmitted.`);
+    }
+
+    /* Admin Operations (Mobile-Optimized Cards) */
+    let currentOrderFilter = 'all';
+
+    function filterAdminOrders(status) {
+      currentOrderFilter = status;
+      document.querySelectorAll("#orderFilterPills button").forEach(b => {
+        b.className = "text-xs font-bold px-3 py-1 rounded-lg bg-slate-100 text-slate-600";
+      });
+      event.target.className = "text-xs font-bold px-3 py-1 rounded-lg bg-obsidian text-white";
+      updateAdminDashboard();
+    }
+
+    function updateAdminDashboard() {
+      const totalRev = orders.reduce((sum, o) => sum + o.totalAmount, 0);
+      const pendingCount = orders.filter(o => o.status === "Pending").length;
+      const acceptedCount = orders.filter(o => o.status === "Accepted").length;
+
+      document.getElementById("adminMetricRevenue").textContent = `$${totalRev.toFixed(2)}`;
+      document.getElementById("adminMetricPending").textContent = pendingCount;
+      document.getElementById("adminMetricAccepted").textContent = acceptedCount;
+      document.getElementById("adminMetricItems").textContent = products.length;
+
+      // Render Orders as Mobile-Friendly Cards
+      const ordersContainer = document.getElementById("adminOrdersContainer");
+      const noOrders = document.getElementById("noOrdersMessage");
+
+      const filteredOrders = currentOrderFilter === 'all' 
+        ? orders 
+        : orders.filter(o => o.status === currentOrderFilter);
+
+      if (filteredOrders.length === 0) {
+        ordersContainer.innerHTML = "";
+        noOrders.classList.remove("hidden");
+      } else {
+        noOrders.classList.add("hidden");
+        ordersContainer.innerHTML = filteredOrders.map(order => `
+          <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200 space-y-2">
+            <div class="flex items-center justify-between">
+              <div>
+                <span class="font-extrabold text-xs text-obsidian">${order.id}</span>
+                <span class="text-[10px] text-slate-400 block">${order.date}</span>
+              </div>
+              <span class="px-2 py-0.5 rounded-full text-[9px] font-extrabold uppercase tracking-wider ${
+                order.status === "Accepted" ? 'bg-emerald-100 text-emerald-800' :
+                order.status === "Pending" ? 'bg-amber-100 text-amberLuxe-800' : 'bg-slate-200 text-slate-700'
+              }">${order.status}</span>
+            </div>
+
+            <div class="text-xs">
+              <span class="font-bold text-slate-800">${order.customer.name}</span> (${order.customer.phone})
+              <span class="block text-[11px] text-slate-500 truncate">${order.customer.address}</span>
+            </div>
+
+            <div class="text-[11px] text-slate-600 bg-white p-2 rounded-lg border border-slate-200/60">
+              ${order.items.map(i => `<div>• ${i.quantity}x ${i.title}</div>`).join("")}
+            </div>
+
+            <div class="flex items-center justify-between pt-1 border-t border-slate-200/80">
+              <span class="font-black text-sm text-obsidian">$${order.totalAmount.toFixed(2)}</span>
+              <div class="space-x-1.5">
+                ${order.status === "Pending" ? `
+                  <button onclick="changeOrderStatus('${order.id}', 'Accepted')" class="px-2.5 py-1 bg-emerald-600 text-white font-bold rounded-lg text-[10px] touch-press">
+                    Accept Order
+                  </button>
+                ` : ''}
+                <button onclick="deleteOrder('${order.id}')" class="px-2 py-1 text-slate-400 hover:text-rose-600 text-xs">
+                  <i class="ph-bold ph-trash"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        `).join("");
+      }
+
+      // Render Admin Catalog Cards
+      const prodContainer = document.getElementById("adminProductsContainer");
+      prodContainer.innerHTML = products.map(item => `
+        <div class="bg-slate-50 p-3 rounded-xl border border-slate-200 flex items-center justify-between gap-2.5">
+          <div class="flex items-center gap-2.5 min-w-0">
+            <div class="w-10 h-10 rounded-lg bg-white border border-slate-200 p-1 flex-shrink-0 flex items-center justify-center">
+              <img src="${item.image}" alt="" class="max-h-full max-w-full object-contain">
+            </div>
+            <div class="min-w-0">
+              <h4 class="font-bold text-xs text-obsidian truncate">${item.title}</h4>
+              <span class="text-[10px] text-slate-400">$${item.price.toFixed(2)} • ${item.category} • ${item.inStock ? '<span class="text-emerald-600 font-bold">In Stock</span>' : '<span class="text-rose-500 font-bold">Out</span>'}</span>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-1.5 flex-shrink-0">
+            <button onclick="openEditProductModal('${item.id}')" class="px-2.5 py-1 bg-white border border-slate-200 text-slate-700 font-bold rounded-lg text-[11px] touch-press">
+              Edit
+            </button>
+            <button onclick="deleteProduct('${item.id}')" class="p-1 text-slate-400 hover:text-rose-600">
+              <i class="ph-bold ph-trash text-sm"></i>
+            </button>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    function changeOrderStatus(orderId, newStatus) {
+      const order = orders.find(o => o.id === orderId);
+      if (order) {
+        order.status = newStatus;
+        saveOrders();
+      }
+    }
+
+    function deleteOrder(orderId) {
+      if (confirm("Delete this order record permanently?")) {
+        orders = orders.filter(o => o.id !== orderId);
+        saveOrders();
+      }
+    }
+
+    function deleteProduct(prodId) {
+      if (confirm("Remove this accessory from the store?")) {
+        products = products.filter(p => p.id !== prodId);
+        saveProducts();
+      }
+    }
+
+    function restoreDefaultCatalog() {
+      if (confirm("Reset catalog back to official factory items?")) {
+        products = [...DEFAULT_PRODUCTS];
+        saveProducts();
+      }
+    }
+
+    /* Product Add / Edit Modal Controls */
+    function openNewProductModal() {
+      document.getElementById("editModalTitle").textContent = "Add Official Apple Accessory";
+      document.getElementById("editProductId").value = "";
+      document.getElementById("editTitle").value = "";
+      document.getElementById("editCategory").value = "iPhone";
+      document.getElementById("editPrice").value = "";
+      document.getElementById("editRating").value = "5.0";
+      document.getElementById("editBadge").value = "";
+      document.getElementById("editImage").value = "https://images.unsplash.com/photo-1616440347437-b1c73416efc2?auto=format&fit=crop&w=600&q=80";
+      document.getElementById("editGallery").value = "";
+      document.getElementById("editVideo").value = "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4";
+      document.getElementById("editDescription").value = "";
+      document.getElementById("editAliExpressEnabled").checked = false;
+      document.getElementById("editAliExpressUrl").value = "";
+      document.getElementById("editAliExpressLabel").value = "Order on AliExpress";
+      document.getElementById("editInStock").checked = true;
+
+      document.getElementById("productEditModal").classList.remove("hidden");
+    }
+
+    function openEditProductModal(productId) {
+      const item = products.find(p => p.id === productId);
+      if (!item) return;
+
+      document.getElementById("editModalTitle").textContent = "Edit Accessory Specifications";
+      document.getElementById("editProductId").value = item.id;
+      document.getElementById("editTitle").value = item.title;
+      document.getElementById("editCategory").value = item.category;
+      document.getElementById("editPrice").value = item.price;
+      document.getElementById("editRating").value = item.rating || 5.0;
+      document.getElementById("editBadge").value = item.badge || "";
+      document.getElementById("editImage").value = item.image;
+      document.getElementById("editGallery").value = item.gallery ? item.gallery.join(", ") : "";
+      document.getElementById("editVideo").value = item.videoUrl || "";
+      document.getElementById("editDescription").value = item.description || "";
+      document.getElementById("editAliExpressEnabled").checked = item.aliExpress ? item.aliExpress.enabled : false;
+      document.getElementById("editAliExpressUrl").value = item.aliExpress ? item.aliExpress.url : "";
+      document.getElementById("editAliExpressLabel").value = item.aliExpress ? (item.aliExpress.label || "Order on AliExpress") : "Order on AliExpress";
+      document.getElementById("editInStock").checked = item.inStock !== false;
+
+      document.getElementById("productEditModal").classList.remove("hidden");
+    }
+
+    function closeProductEditModal() {
+      document.getElementById("productEditModal").classList.add("hidden");
+    }
+
+    function handleProductSave(e) {
+      e.preventDefault();
+      const id = document.getElementById("editProductId").value;
+      const isNew = !id;
+
+      const galleryRaw = document.getElementById("editGallery").value.trim();
+      const galleryArr = galleryRaw ? galleryRaw.split(/[\n,]+/).map(s => s.trim()).filter(Boolean) : [];
+
+      const productData = {
+        id: isNew ? "agh_custom_" + Date.now() : id,
+        title: document.getElementById("editTitle").value.trim(),
+        category: document.getElementById("editCategory").value,
+        price: parseFloat(document.getElementById("editPrice").value) || 0,
+        rating: parseFloat(document.getElementById("editRating").value) || 5.0,
+        badge: document.getElementById("editBadge").value.trim(),
+        image: document.getElementById("editImage").value.trim(),
+        gallery: galleryArr.length > 0 ? galleryArr : [document.getElementById("editImage").value.trim()],
+        videoUrl: document.getElementById("editVideo").value.trim(),
+        description: document.getElementById("editDescription").value.trim(),
+        inStock: document.getElementById("editInStock").checked,
+        aliExpress: {
+          enabled: document.getElementById("editAliExpressEnabled").checked,
+          url: document.getElementById("editAliExpressUrl").value.trim(),
+          label: document.getElementById("editAliExpressLabel").value.trim() || "Order on AliExpress"
+        }
+      };
+
+      if (isNew) {
+        products.unshift(productData);
+      } else {
+        const index = products.findIndex(p => p.id === id);
+        if (index > -1) products[index] = productData;
+      }
+
+      saveProducts();
+      closeProductEditModal();
+    }
+  </script>
+</body>
+</html>
